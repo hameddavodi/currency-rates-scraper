@@ -1,5 +1,4 @@
 name: Daily Currency Rates Scraper
-
 on:
   schedule:
     - cron: '0 13 * * *'  # Runs at 13:00 UTC every day
@@ -26,7 +25,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install requests beautifulsoup4 pandas
+        pip install pandas playwright
+        pip install -r requirements.txt  # If you have a requirements file
+        
+    - name: Install Playwright browsers
+      run: |
+        python -m playwright install
+        python -m playwright install-deps
     
     - name: Scrape Currency Rates
       run: python currency_scraper.py
