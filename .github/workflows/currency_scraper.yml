@@ -1,0 +1,35 @@
+name: Daily Currency Rates Scraper
+
+on:
+  schedule:
+    - cron: '0 13 * * *'  # Runs at 13:00 UTC every day
+  workflow_dispatch:     # Allows manual triggering
+
+jobs:
+  scrape-currency-rates:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests beautifulsoup4 pandas
+    
+    - name: Scrape Currency Rates
+      run: python currency_scraper.py
+    
+    - name: Commit and Push Changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add logs/currency_rates.csv
+        git commit -m "Update currency rates $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+        git push
