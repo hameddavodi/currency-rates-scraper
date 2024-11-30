@@ -52,7 +52,7 @@ class ValueExtractor:
         """
         async with async_playwright() as p:
             # Launch browser
-            browser = await p.chromium.launch(headless=False)
+            browser = await p.chromium.launch(headless=True)
             
             # Create a new page
             page = await browser.new_page()
