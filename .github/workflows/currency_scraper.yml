@@ -9,9 +9,14 @@ jobs:
   scrape-currency-rates:
     runs-on: ubuntu-latest
     
+    permissions:
+      contents: write  # This grants write access to the repository
+    
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}  # Use the built-in GitHub token
     
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -28,8 +33,8 @@ jobs:
     
     - name: Commit and Push Changes
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config user.name github-actions
+        git config user.email github-actions@github.com
         git add logs/currency_rates.csv
         git commit -m "Update currency rates $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
         git push
