@@ -1,7 +1,7 @@
 name: Daily Currency Rates Scraper
 on:
   schedule:
-    - cron: '0 13 * * *'  # Runs at 13:00 UTC every day
+    - cron: '0 */3 * * *'  # Runs at 13:00 UTC every day
   workflow_dispatch:     # Allows manual triggering
 
 jobs:
