@@ -4,7 +4,7 @@ Automated daily scraper for currency rates using GitHub Actions.
 
 ## Data Sources
 - Currency rates from Bonbast.com
-- Scraped daily at 13:00 UTC
+- Scraped every 3 hours per day
 
 ## Workflow
 - Scrapes currency rates
