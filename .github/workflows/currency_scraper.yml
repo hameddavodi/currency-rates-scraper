@@ -25,7 +25,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pandas playwright asyncio
+        pip install pandas playwright asyncio nest_asyncio
 
         
     - name: Install Playwright browsers
