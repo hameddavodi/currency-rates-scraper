@@ -58,9 +58,12 @@ class ValueExtractor:
             page = await browser.new_page()
             
             try:
-                # Navigate to the specified URL
+                # Navigate to the specified URL with longer timeout and wait for network
                 await page.set_extra_http_headers({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"})
-                await page.goto(self.url, wait_until='networkidle')
+                await page.goto(self.url, wait_until='load', timeout=60000)
+                
+                # Wait for the JavaScript to populate the data
+                await page.wait_for_selector('span#bitcoin.same_val', timeout=30000)
                 
                 # Dictionary to store extracted values
                 extracted_values = {}
@@ -98,7 +101,6 @@ class ValueExtractor:
 # Example usage
 async def main():
     url = 'https://www.bonbast.com/' 
-
     result = await ValueExtractor.run(url)
     
     if result:
