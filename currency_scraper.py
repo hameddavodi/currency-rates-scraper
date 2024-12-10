@@ -14,4 +14,4 @@ async def open_url():
 
 # Run the script
 if __name__ == '__main__':
-    asyncio.run(main())
+    asyncio.run(open_url())
