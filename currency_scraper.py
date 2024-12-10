@@ -12,5 +12,6 @@ async def open_url():
         print("Page title:", await page.title())
         await browser.close()
 
-# Run the async function
-await open_url()
+# Run the script
+if __name__ == '__main__':
+    asyncio.run(main())
